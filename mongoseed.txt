@@ -1,0 +1,4 @@
+Database Seeding: User		local-admin added with password set to 8SbMWjhNc5F2WnzMSFVCS
+Database Seeding: User		local-user added with password set to zcDJvDq65YHkfx94gxwzdVg6jYtFXpvUw
+Database Seeding: Article	First Article added
+

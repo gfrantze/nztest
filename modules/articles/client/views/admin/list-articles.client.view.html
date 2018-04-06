@@ -1,0 +1,46 @@
+﻿<section>
+  <div class="page-header">
+    <h1>
+      Articles
+      <a class="btn btn-primary pull-right" data-ui-sref="admin.articles.create">
+        <i class="glyphicon glyphicon-plus"></i>
+      </a>
+    </h1>
+  </div>
+
+
+
+
+  <div>
+    <div>
+      <input type="text" ng-model="search" ng-keyup="vm.trimlist(search)" placeholder="Enter your search terms" />
+      and/or select a category
+      <select ng-options="x for x in vm.allcat" ng-model="category" ng-change="vm.trimlist(category,isOption=true)">
+         <option value="" selected="selected">All Categories</option>
+      </select>
+
+    </div>
+
+  </div>
+  <div class="list-group">
+    <a data-ng-repeat="article in vm.whattoshow" data-ui-sref="admin.articles.edit({articleId: article._id})" class="list-group-item">
+
+      <img ng-src="{{article.articleImageURL}}" height="100" />
+      <small class="list-group-item-text">
+        Posted on
+        <span data-ng-bind="article.created | date:'mediumDate'"></span>
+        by
+        <span ng-if="article.user" ng-bind="article.user.displayName"></span>
+        <span ng-if="!article.user">Deleted User</span>
+      </small>
+
+      <h4 class="list-group-item-heading" data-ng-bind="article.title"></h4>
+      <p class="list-group-item-text" data-ng-bind="article.content"></p>
+      In Categories
+      <p class="list-group-item-text" data-ng-bind="article.category"></p>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" data-ng-if="vm.articles.$resolved && !vm.articles.length">
+    No products yet, why don't you <a data-ui-sref="admin.articles.create">create one</a>?
+  </div>
+</section>
