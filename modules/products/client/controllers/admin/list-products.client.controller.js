@@ -32,7 +32,7 @@
     			allcats.push(ok);
     		}
     	}
-    	vm.allcat = allcats;
+    	vm.allcat = allcats.filter(function(value, index){ return allcats.indexOf(value) == index });
 
     }
     );
