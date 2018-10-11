@@ -5,14 +5,14 @@
  */
 var path = require('path'),
   mongoose = require('mongoose'),
-  Article = mongoose.model('Article'),
+  Product = mongoose.model('Product'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
 /**
  * Create an product
  */
 exports.create = function (req, res) {
-  var product = new Article(req.body);
+  var product = new Product(req.body);
   product.user = req.user;
 
   product.save(function (err) {
@@ -33,8 +33,8 @@ exports.read = function (req, res) {
   // convert mongoose document to JSON
   var product = req.product ? req.product.toJSON() : {};
 
-  // Add a custom field to the Article, for determining if the current User is the "owner".
-  // NOTE: This field is NOT persisted to the database, since it doesn't exist in the Article model.
+  // Add a custom field to the Product, for determining if the current User is the "owner".
+  // NOTE: This field is NOT persisted to the database, since it doesn't exist in the Product model.
   product.isCurrentUserOwner = !!(req.user && product.user && product.user._id.toString() === req.user._id.toString());
 
   res.json(product);
@@ -85,7 +85,7 @@ exports.delete = function (req, res) {
  * List of Products
  */
 exports.list = function (req, res) {
-  Article.find().sort('-created').populate('user', 'displayName').exec(function (err, products) {
+  Product.find().sort('-created').populate('user', 'displayName').exec(function (err, products) {
     if (err) {
       return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
@@ -97,17 +97,17 @@ exports.list = function (req, res) {
 };
 
 /**
- * Article middleware
+ * Product middleware
  */
 exports.productByID = function (req, res, next, id) {
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({
-      message: 'Article is invalid'
+      message: 'Product is invalid'
     });
   }
 
-  Article.findById(id).populate('user', 'displayName').exec(function (err, product) {
+  Product.findById(id).populate('user', 'displayName').exec(function (err, product) {
     if (err) {
       return next(err);
     } else if (!product) {

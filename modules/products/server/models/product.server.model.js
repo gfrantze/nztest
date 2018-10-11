@@ -10,9 +10,9 @@ var mongoose = require('mongoose'),
   chalk = require('chalk');
 
 /**
- * Article Schema
+ * Product Schema
  */
-var ArticleSchema = new Schema({
+var ProductSchema = new Schema({
   created: {
     type: Date,
     default: Date.now
@@ -54,16 +54,16 @@ var ArticleSchema = new Schema({
   }
 });
 
-ArticleSchema.statics.seed = seed;
+ProductSchema.statics.seed = seed;
 
-mongoose.model('Article', ArticleSchema);
+mongoose.model('Product', ProductSchema);
 
 /**
-* Seeds the User collection with document (Article)
+* Seeds the User collection with document (Product)
 * and provided options.
 */
 function seed(doc, options) {
-  var Article = mongoose.model('Article');
+  var Product = mongoose.model('Product');
 
   return new Promise(function (resolve, reject) {
 
@@ -103,7 +103,7 @@ function seed(doc, options) {
 
     function skipDocument() {
       return new Promise(function (resolve, reject) {
-        Article
+        Product
           .findOne({
             title: doc.title
           })
@@ -120,7 +120,7 @@ function seed(doc, options) {
               return resolve(true);
             }
 
-            // Remove Article (overwrite)
+            // Remove Product (overwrite)
 
             existing.remove(function (err) {
               if (err) {
@@ -137,11 +137,11 @@ function seed(doc, options) {
       return new Promise(function (resolve, reject) {
         if (skip) {
           return resolve({
-            message: chalk.yellow('Database Seeding: Article\t' + doc.title + ' skipped')
+            message: chalk.yellow('Database Seeding: Product\t' + doc.title + ' skipped')
           });
         }
 
-        var product = new Article(doc);
+        var product = new Product(doc);
 
         product.save(function (err) {
           if (err) {
@@ -149,7 +149,7 @@ function seed(doc, options) {
           }
 
           return resolve({
-            message: 'Database Seeding: Article\t' + product.title + ' added'
+            message: 'Database Seeding: Product\t' + product.title + ' added'
           });
         });
       });

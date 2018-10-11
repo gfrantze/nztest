@@ -18,8 +18,7 @@
 
     vm.products = ProductsService.query({},
 
-    	
-
+    // Kick off and find product categories
     function init() {
 
     	vm.whattoshow = vm.products;
@@ -33,11 +32,10 @@
     		}
     	}
     	vm.allcat = allcats.filter(function(value, index){ return allcats.indexOf(value) == index });
-
     }
     );
 
-
+    //Text search helper function
     function trimlist(te, isOption){
     	vm.whattoshow=[];
 
@@ -46,7 +44,6 @@
     	}
 
     	else{
-    	
 	    	for(var i=0;i< (vm.products).length;i++){
 	    		var t = vm.products[i];
 
@@ -61,16 +58,7 @@
 	    			vm.whattoshow.push(vm.products[i]);
 	    		}
 	    	}
-
     	}
-
-    	console.log(vm.whattoshow);
-
     }
-
-
-
-
-
   }
 }());

@@ -32,7 +32,7 @@
           roles: ['admin']
         },
         resolve: {
-          productResolve: newArticle
+          productResolve: newProducts
         }
       })
       .state('admin.products.edit', {
@@ -45,22 +45,22 @@
           pageTitle: '{{ productResolve.title }}'
         },
         resolve: {
-          productResolve: getArticle
+          productResolve: getProducts
         }
       });
   }
 
-  getArticle.$inject = ['$stateParams', 'ProductsService'];
+  getProducts.$inject = ['$stateParams', 'ProductsService'];
 
-  function getArticle($stateParams, ProductsService) {
+  function getProducts($stateParams, ProductsService) {
     return ProductsService.get({
       productId: $stateParams.productId
     }).$promise;
   }
 
-  newArticle.$inject = ['ProductsService'];
+  newProducts.$inject = ['ProductsService'];
 
-  function newArticle(ProductsService) {
+  function newProducts(ProductsService) {
     return new ProductsService();
   }
 }());
