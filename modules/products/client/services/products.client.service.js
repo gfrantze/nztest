@@ -8,7 +8,7 @@
   ProductsService.$inject = ['$resource', '$log'];
 
   function ProductsService($resource, $log) {
-    var Article = $resource('/api/products/:productId', {
+    var Product = $resource('/api/products/:productId', {
       productId: '@_id'
     }, {
       update: {
@@ -16,14 +16,14 @@
       }
     });
 
-    angular.extend(Article.prototype, {
+    angular.extend(Product.prototype, {
       createOrUpdate: function () {
         var product = this;
         return createOrUpdate(product);
       }
     });
 
-    return Article;
+    return Product;
 
     function createOrUpdate(product) {
       if (product._id) {

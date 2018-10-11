@@ -26,7 +26,7 @@
         controller: 'ProductsController',
         controllerAs: 'vm',
         resolve: {
-          productResolve: getArticle
+          productResolve: getProduct
         },
         data: {
           pageTitle: '{{ productResolve.title }}'
@@ -34,9 +34,9 @@
       });
   }
 
-  getArticle.$inject = ['$stateParams', 'ProductsService'];
+  getProduct.$inject = ['$stateParams', 'ProductsService'];
 
-  function getArticle($stateParams, ProductsService) {
+  function getProduct($stateParams, ProductsService) {
     return ProductsService.get({
       productId: $stateParams.productId
     }).$promise;
