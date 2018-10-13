@@ -49,7 +49,7 @@ exports.update = function (req, res) {
   product.title = req.body.title;
   product.content = req.body.content;
   product.productImageURL = req.body.productImageURL;
-  product.cost = req.body.cost;
+  product.cost = req.body.cost.toFixed(2);
   product.quantity = req.body.quantity;
   product.category = req.body.category;
 
