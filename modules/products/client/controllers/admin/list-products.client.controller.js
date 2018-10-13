@@ -21,8 +21,8 @@
     // Kick off and find product categories
     function init() {
 
-    	vm.whattoshow = vm.products;
-	var catsp = [];
+        vm.whattoshow = vm.products;
+        var catsp = [];
 
     	for(var i=0;i<(vm.products).length;i++){
     		var cats = vm.products[i].category;
