@@ -66,16 +66,8 @@ exports.renderNotFound = function (req, res) {
 };
 
 
+//handles core image upload functionality, API endpoint
 exports.uploads = function (req, res) {
-  // console.log('req.headers.content-type:'+req.headers['content-type']); //must be multipart/form-data
-  // console.log('req.files.uploadedFile: '+req.files.uploadedFile); //file object
-  // console.log('req.files.uploadedFile.fieldname: '+req.files.uploadedFile.fieldName);// "uploadedFile"
-  // console.log('req.files.uploadedFile.name: '+req.files.uploadedFile.name); // original filename
-  // console.log('req.files.uploadedFile.originalFilename: '+req.files.uploadedFile.originalFilename); // orininal Filename
-  // console.log('req.files.uploadedFile.type: '+req.files.uploadedFile.type); //image/jpeg
-  // console.log('req.files.uploadedFile.size: '+req.files.uploadedFile.size); // file size
-  // console.log('req.body.testkey: '+req.body.testkey); // submited form
-
 
   var file=req.files.uploadedFile;
   var user = req.user;
@@ -86,6 +78,7 @@ exports.uploads = function (req, res) {
   var destFolder = path.join(path.resolve('./'),config.uploads.fileUpload.dest,userEncode);
   var newFilename = Date.now()+"-"+file.originalFilename;
   var destFile = destFolder+"/"+newFilename;
+
   //var destURL = req.protocol + '://' + req.get('host') + config.uploads.fileUpload.dest+userEncode+"/"+Date.now()+".jpg";
   var destURL = config.uploads.fileUpload.dest+userEncode+"/"+newFilename;
 
