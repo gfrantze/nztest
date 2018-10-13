@@ -46,15 +46,21 @@
                     var t = vm.products[i];
 
                     //utilize this function for category search
-                    if (isOption)
-                        var s_w = t.category
-                    else
+                    if (isOption){
+                        var s_w = t.category.split(',');
+			var search_cats = s_w.findIndex(item => te.toUpperCase() === item.toUpperCase());
+			if(search_cats!=-1)
+			    vm.whattoshow.push(t);
+		    }
+                    else {
                         var s_w = t.title + t.category + t.content;
-                    s_w = s_w.toUpperCase();
-                    var t_e = te.toUpperCase();
-                    if (s_w.indexOf(t_e) != -1) {
-                        vm.whattoshow.push(vm.products[i]);
-                    }
+                        s_w = s_w.toUpperCase();
+                        var t_e = te.toUpperCase();
+                        if (s_w.indexOf(t_e) != -1) {
+                            vm.whattoshow.push(t);
+                        }
+
+		    }
                 }
             }
         }
