@@ -22,16 +22,15 @@
     function init() {
 
     	vm.whattoshow = vm.products;
-    	var allcats=[];
+	var catsp = [];
+
     	for(var i=0;i<(vm.products).length;i++){
     		var cats = vm.products[i].category;
-    		var catsp = cats.split(',');
-    		for(var j=0;j<catsp.length;j++){
-    			var ok = catsp[j].trim();
-    			allcats.push(ok);
-    		}
-    	}
-    	vm.allcat = allcats.filter(function(value, index){ return allcats.indexOf(value) == index });
+		console.log(cats.split(','));
+    		catsp.push.apply(catsp, cats.split(',').map(item => item.trim()));
+	}
+	
+    	vm.allcat = catsp.filter(function(value, index){ return catsp.indexOf(value) == index });
     }
     );
 
@@ -47,14 +46,14 @@
 	    	for(var i=0;i< (vm.products).length;i++){
 	    		var t = vm.products[i];
 
+			//utilize this function for category search
 	    		if(isOption)
 	    			var s_w = t.category
 	    		else
 	    			var s_w = t.title+t.category+t.content;
 	    		s_w = s_w.toUpperCase();
 	    		var t_e = te.toUpperCase();
-	    		if(s_w.includes(t_e)){
-	    			
+	    		if(s_w.indexOf(t_e) != -1){
 	    			vm.whattoshow.push(vm.products[i]);
 	    		}
 	    	}
