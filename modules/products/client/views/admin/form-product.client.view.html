@@ -36,7 +36,7 @@
         <div class="form-group">
           <label for="image">Featured Image </label>
           <button type="button" class="btn btn-secondary" type="file"
-            ngf-select="uploadFiles($file, $invalidFiles)"
+            ngf-select="vm.uploadFiles($file, $invalidFiles)"
             accept="image/*" ngf-max-size="1MB">
             {{vm.product.productImageURL ? 'Update Image' : 'Create Image'}}</button>
           <div class="text-center" ng-show="vm.product.productImageURL" >

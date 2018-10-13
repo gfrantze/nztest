@@ -16,6 +16,7 @@
     vm.remove = remove;
     vm.save = save;
     vm.prefab = "";
+    vm.uploadFiles = uploadFiles;
 
     // Remove existing Product
     function remove() {
@@ -27,7 +28,7 @@
       }
     }
 
-    $scope.uploadFiles = function(file, errFiles) {
+    function uploadFiles(file, errFiles) {
         if (file) {
             file.upload = Upload.upload({
                 url: '/api/uploads',
@@ -51,18 +52,12 @@
         return false;
       }
 
+      // grab categories & doublecheck for redundancy before integrating data
       if(vm.product.category){
-        var format=vm.product.category.split(',');
-        var all = [];
-        for(var i=0;i<format.length;i++){
-          all.push(format[i].trim())
-        }
-        var uniquecats = all.filter(onlyUnique);
-        var uniquecatstring = uniquecats.join(",");
-        vm.product.category = uniquecatstring;
+        var format=vm.product.category.split(',').map(item => item.trim());
+        var uniquecats = format.filter(function(value, index){ return format.indexOf(value) == index });
+        vm.product.category = uniquecats.join(",");
       }
-
-
 
       // Create a new product, or update the current instance
       vm.product.createOrUpdate()
